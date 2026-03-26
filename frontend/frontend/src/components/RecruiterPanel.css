@@ -1,0 +1,13 @@
+.recruiter-panel h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.recruiter-panel textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.recruiter-panel .primary-btn {
+    width: 100%;
+}

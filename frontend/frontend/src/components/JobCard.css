@@ -1,0 +1,17 @@
+.job-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.job-card p {
+    margin: 0;
+}
+
+.job-card .primary-btn {
+    width: 100%;
+}
+
+.apply-box input[type='file'] {
+    background: #fafafa;
+}
