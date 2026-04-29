@@ -87,7 +87,7 @@ const login = async (req, res) => {
             return res.status(404).json({ message: 'User not found. Please register first.' })
         }
 
-        if (!user.password || user.authProvider === 'google') {
+        if (!user.password) {
             return res.status(400).json({
                 message: 'This account uses Google login. Please continue with Google.',
             })
@@ -168,10 +168,6 @@ const googleLogin = async (req, res) => {
         } else {
             if (role && user.role !== role) {
                 return res.status(400).json({ message: 'Role does not match this account' })
-            }
-
-            if (user.authProvider !== 'google') {
-                user.authProvider = 'google'
             }
 
             if (!user.googleId) {

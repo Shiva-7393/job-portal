@@ -1,3 +1,5 @@
+import { API_BASE_URL } from '../api'
+
 function RecruiterApplicants({ applications }) {
     if (!applications.length) {
         return (
@@ -20,7 +22,7 @@ function RecruiterApplicants({ applications }) {
                         <p><strong>Status:</strong> {application.status}</p>
                         {application.resumePath && (
                             <a
-                                href={`http://localhost:5000${application.resumePath}`}
+                                href={application.resumeUrl || `${API_BASE_URL.replace('/api', '')}${application.resumePath}`}
                                 target="_blank"
                                 rel="noreferrer"
                             >

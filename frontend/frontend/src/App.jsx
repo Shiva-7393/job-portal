@@ -11,7 +11,7 @@ import {
   FiUser,
   FiUsers,
 } from 'react-icons/fi'
-import { api } from './api'
+import { api, API_BASE_URL } from './api'
 import LoginForm from './components/LoginForm'
 import './App.css'
 
@@ -539,7 +539,7 @@ function App() {
               </p>
               {selectedCandidateApplication.resumePath && (
                 <a
-                  href={`http://localhost:5000${selectedCandidateApplication.resumePath}`}
+                  href={selectedCandidateApplication.resumeUrl || `${API_BASE_URL.replace('/api', '')}${selectedCandidateApplication.resumePath}`}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -567,7 +567,11 @@ function App() {
                 </button>
 
                 {application.resumePath && (
-                  <a href={`http://localhost:5000${application.resumePath}`} target="_blank" rel="noreferrer">
+                  <a
+                    href={application.resumeUrl || `${API_BASE_URL.replace('/api', '')}${application.resumePath}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     View Resume
                   </a>
                 )}

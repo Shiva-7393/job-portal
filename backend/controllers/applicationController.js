@@ -1,6 +1,22 @@
 const Application = require('../models/Application')
 const Job = require('../models/Job')
 
+const withResumeUrl = (application, req) => {
+    const payload = application.toObject ? application.toObject() : application
+
+    if (!payload.resumePath) {
+        return {
+            ...payload,
+            resumeUrl: '',
+        }
+    }
+
+    return {
+        ...payload,
+        resumeUrl: `${req.protocol}://${req.get('host')}${payload.resumePath}`,
+    }
+}
+
 const applyForJob = async (req, res) => {
     try {
         const { studentId, jobId } = req.body
@@ -44,7 +60,7 @@ const getApplicationsByStudent = async (req, res) => {
             .sort({ createdAt: -1 })
             .populate('job')
 
-        return res.status(200).json(applications)
+        return res.status(200).json(applications.map((application) => withResumeUrl(application, req)))
     } catch (error) {
         return res.status(500).json({ message: error.message })
     }
@@ -62,7 +78,7 @@ const getApplicationsByRecruiter = async (req, res) => {
             .populate('job', 'title company location')
             .populate('student', 'name email role')
 
-        return res.status(200).json(applications)
+        return res.status(200).json(applications.map((application) => withResumeUrl(application, req)))
     } catch (error) {
         return res.status(500).json({ message: error.message })
     }
