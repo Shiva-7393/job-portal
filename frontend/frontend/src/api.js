@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'http://localhost:5000/api'
+export const API_BASE_URL = 'https://job-portal-2-6ogw.onrender.com/api'
 
 const parseResponse = async (response) => {
     const data = await response.json()
